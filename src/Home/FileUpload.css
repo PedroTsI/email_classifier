@@ -1,0 +1,230 @@
+/* ==============================================
+   1. Variáveis Globais e Estilo Base (Tema Dark)
+   ============================================== */
+:root {
+  --bg-color: #1a1a1a;
+  --text-color: #e0e0e0;
+  --border-color: #444;
+  --primary-color: #007bff;
+  --primary-light: #0056b3;
+  --dropzone-bg: #282828;
+  --dropzone-border: #666;
+  --file-info-bg: #333;
+  --response-bg: #222;
+  --response-border: #0056b3;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: Arial, sans-serif;
+  
+  /* Centralização */
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  min-height: 100vh; 
+  margin: 0; 
+  transition: background-color 0.3s;
+}
+
+/* ==============================================
+   2. Estilos do Componente FileUpload
+   ============================================== */
+.file-upload-container {
+  max-width: 600px;
+  width: 90%; 
+  padding: 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  background-color: #242424;
+}
+
+h2 {
+  color: var(--text-color);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* --- NOVO: CONTAINER DE CONTEÚDO FIXO --- */
+.input-content-box {
+    /* Altura que a box terá em AMBOS os modos */
+    height: 180px; 
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Dropzone (Área de Arrastar e Soltar) */
+.dropzone {
+    flex-grow: 1; /* Ocupa o espaço dentro do .input-content-box */
+    border: 2px dashed var(--dropzone-border);
+    border-radius: 6px;
+    padding: 40px 20px;
+    text-align: center;
+    cursor: pointer;
+    background-color: var(--dropzone-bg);
+    transition: all 0.3s ease;
+}
+
+.dropzone.is-dragging {
+  border-color: var(--primary-color);
+  background-color: #383838;
+}
+
+/* Informações do Arquivo */
+.file-info {
+  margin-top: 5px; /* Ajuste para caber nos 180px */
+  padding: 10px 15px;
+  background-color: var(--file-info-bg);
+  border: 1px solid #555;
+  border-radius: 4px;
+}
+
+/* Botão de Envio */
+.submit-button {
+  /* Aumente o margin-top para criar espaço claro */
+  margin-top: 50px; 
+  padding: 12px 15px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  font-weight: bold;
+  font-size: 16px;
+  transition: background-color 0.2s;
+}
+
+.submit-button:hover:not(:disabled) {
+  background-color: var(--primary-light);
+}
+
+.submit-button:disabled {
+  background-color: #4a4a4a;
+  color: #a0a0a0;
+  cursor: not-allowed;
+}
+
+/* ==============================================
+   3. Estilos para Alternância de Modo
+   ============================================== */
+
+.mode-selector {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.mode-button {
+    flex: 1;
+    padding: 10px 15px;
+    border: 1px solid var(--dropzone-border);
+    border-radius: 6px;
+    background-color: #333;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.mode-button:hover:not(:disabled) {
+    background-color: #444;
+}
+
+.mode-button.active {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}
+
+/* Área de Texto */
+.text-input-area {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+
+.text-input-area textarea {
+    flex-grow: 1; 
+    width: 100%;
+    min-height: 100%; 
+    
+    padding: 15px;
+    border: 1px solid var(--dropzone-border);
+    border-radius: 6px;
+    background-color: var(--dropzone-bg);
+    color: var(--text-color);
+    resize: none; /* Desabilita o redimensionamento */
+    font-size: 15px;
+    box-sizing: border-box; 
+    margin-bottom: 5px; 
+}
+
+.text-input-area p {
+    margin-top: 5px;
+    font-size: 12px;
+    color: #888;
+    text-align: right;
+}
+
+/* ==============================================
+   4. Estilos da Área de Resposta
+   ============================================== */
+.response-group-row {
+    display: flex;
+    gap: 20px; 
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.response-card {
+    flex: 1; 
+    padding: 15px;
+    border-radius: 4px;
+    border: 1px solid #0056b3; 
+    background-color: #2a2a2a;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.response-card h4 {
+    margin-top: 0;
+    font-size: 14px;
+    color: #a0c7f8;
+}
+
+.response-card p {
+    margin-bottom: 0;
+    font-size: 16px;
+    font-weight: bold;
+    word-wrap: break-word; 
+    word-break: break-word;
+}
+
+.response-area-label {
+  margin-top: 30px;
+  color: var(--text-color);
+  font-weight: normal;
+}
+
+.response-area {
+  margin-top: 10px;
+  padding: 15px;
+  border: 1px solid var(--response-border);
+  border-radius: 4px;
+  min-height: 80px;
+  background-color: var(--response-bg);
+  
+  /* Quebra de Linha Automática */
+  white-space: pre-wrap;
+  word-break: break-all; 
+  overflow-x: hidden; 
+
+  font-family: Consolas, monospace;
+  font-size: 14px;
+  color: #c9d1d9; 
+}
