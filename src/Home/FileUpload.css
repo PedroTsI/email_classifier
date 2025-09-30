@@ -222,7 +222,7 @@ h2 {
   /* Quebra de Linha Automática */
   white-space: pre-wrap;
   word-break: break-all; 
-  overflow-x: hidden; 
+  overflow-x: auto; 
 
   font-family: Consolas, monospace;
   font-size: 14px;
