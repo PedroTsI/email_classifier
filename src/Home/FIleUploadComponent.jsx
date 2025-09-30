@@ -118,7 +118,7 @@ export default function FileUploadComponent() {
     } 
 
     try {
-      const response = await fetch(API_ENDPOINT, {
+      const response = await fetch("http://127.0.0.1:8000/classify_file", {
         method: 'POST',
         body: formData, 
       });
