@@ -1,16 +1,51 @@
-# React + Vite
+## 🚀 Tecnologias
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este projeto foi desenvolvido utilizando as seguintes tecnologias:
 
-Currently, two official plugins are available:
+-   **React**: Biblioteca JavaScript para criar interfaces de usuário.
+-   **Vite**: Ferramenta de build que oferece uma experiência de desenvolvimento rápida.
+-   **TypeScript**: Linguagem de programação.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ⚙️ Pré-requisitos
 
-## React Compiler
+Antes de começar, você precisará ter o [Node.js](https://nodejs.org/) instalado em sua máquina.
 
-The React Compiler is not enabled on this template. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Recomendamos o uso de um gerenciador de pacotes como o [npm](https://www.npmjs.com/) ou [yarn](https://yarnpkg.com/).
 
-## Expanding the ESLint configuration
+## 💻 Instalação
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Siga os passos abaixo para clonar e executar o projeto em sua máquina local:
+
+1.  **Clone o repositório:**
+
+    ```bash
+    git clone [https://aws.amazon.com/pt/what-is/repo/](https://aws.amazon.com/pt/what-is/repo/)
+    ```
+
+2.  **Navegue até o diretório do projeto:**
+
+    ```bash
+    cd [nome-do-diretorio-do-projeto]
+    ```
+
+3.  **Instale as dependências:**
+
+    ```bash
+    npm install
+    # ou yarn install
+    # ou pnpm install
+    ```
+
+4.  **Inicie a aplicação em modo de desenvolvimento:**
+
+    ```bash
+    npm run dev
+    # ou yarn dev
+    # ou pnpm dev
+    ```
+
+    A aplicação estará disponível em `http://localhost:5173`.
+
+5. **Teste da Aplicação**
+
+    Para testar a aplicação juntamente com o back é necessario rodar ambos e no arquivo src/Home/FileUploadComponent.jsx na linha 121 substituir a URL por "http://127.0.0.1:8000/classify_file"
