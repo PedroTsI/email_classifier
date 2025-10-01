@@ -1,15 +1,9 @@
-// vite.config.js (na raiz do projeto React)
-
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
   
-  // ======================================================
-  // CONFIGURAÇÃO DO PROXY PARA CONTORNAR O CORS
-  // ======================================================
   server: {
     proxy: {
       // Quando o front-end requisitar /api (ou /classify_file)

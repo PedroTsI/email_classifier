@@ -27,14 +27,11 @@ export default function FileUploadComponent() {
   const [response, setResponse] = useState(INITIAL_RESPONSE_STATE);
 
   const allowedTypes = useMemo(() => ['application/pdf', 'text/plain'], []);
-  const API_ENDPOINT = '/classify_file'; // Usando o proxy do Vite
 
   // Função utilitária para atualizar o estado de resposta (Performance)
   const updateResponse = useCallback((updates) => {
     setResponse(prev => ({ ...prev, ...updates }));
   }, []); 
-
-  // --- Funções de Estado e Reset (usando useCallback) ---
   
   const resetResults = useCallback(() => {
     updateResponse({
@@ -50,8 +47,6 @@ export default function FileUploadComponent() {
       setInputText('');
       resetResults();
   }, [resetResults, updateResponse]);
-
-  // --- Handlers de Upload (usando useCallback) ---
   
   const handleFileChange = useCallback((event) => {
     const selectedFile = event.target.files[0];
@@ -87,8 +82,6 @@ export default function FileUploadComponent() {
     }
   }, [allowedTypes, resetResults, updateResponse]);
 
-
-  // --- Função de Envio (usando useCallback) ---
   const handleSubmit = useCallback(async () => {
     const isUploadValid = mode === MODE.UPLOAD && file;
     const isTextValid = mode === MODE.TEXT && inputText.trim().length >= 5;
@@ -98,7 +91,6 @@ export default function FileUploadComponent() {
       return;
     }
 
-    // 1. Define estados de carregamento e processamento
     updateResponse({ 
         loading: true, 
         statusMessage: `Conectando-se à API...`,
@@ -109,7 +101,6 @@ export default function FileUploadComponent() {
 
     const formData = new FormData();
 
-    // 2. Criação do FormData
     if (mode === MODE.UPLOAD) {
       formData.append('file', file); 
     } else if (mode === MODE.TEXT) {
@@ -127,7 +118,6 @@ export default function FileUploadComponent() {
         const data = await response.json();
         const filename = mode === MODE.UPLOAD ? data.filename : "do email digitado";
 
-        // 3. Sucesso: Atualiza o estado
         updateResponse({
             classification: data.classification || 'Não Classificado',
             emailSubject: data.email_subject || 'Assunto Não Encontrado',
@@ -137,7 +127,6 @@ export default function FileUploadComponent() {
         });
 
       } else {
-        // 4. Erro HTTP
         const errorText = await response.text(); 
         updateResponse({
             statusMessage: `Erro HTTP (${response.status} - ${response.statusText}).`,
@@ -149,7 +138,6 @@ export default function FileUploadComponent() {
       }
 
     } catch (error) {
-      // 5. Erro de Rede/Conexão
       console.error('Erro fatal de rede:', error);
       updateResponse({
         statusMessage: `Erro de Conexão/Rede. Verifique se o backend está ativo.`,
@@ -161,8 +149,6 @@ export default function FileUploadComponent() {
     }
   }, [mode, file, inputText, updateResponse]);
 
-
-  // --- Propriedades Derivadas (Clean Code) ---
   const dropzoneClass = `dropzone ${isDragging ? 'is-dragging' : ''}`;
   const isSubmitDisabled = response.loading || (mode === MODE.UPLOAD && !file) || (mode === MODE.TEXT && inputText.trim().length < 5);
 
@@ -187,8 +173,6 @@ export default function FileUploadComponent() {
             Inserir Texto
         </button>
       </div>
-
-      {/* --- ÁREA CONDICIONAL CENTRAL (TAMANHO PADRONIZADO) --- */}
       
       {mode === MODE.UPLOAD ? (
         // Modo Upload
@@ -231,13 +215,12 @@ export default function FileUploadComponent() {
                 placeholder="Cole o texto do e-mail ou documento grande aqui para análise..."
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
-                rows="1" // Usamos rows=1 e o CSS fará o crescimento
+                rows="1"
                 disabled={response.loading}
             ></textarea>
             <p>Caracteres: {inputText.length}</p>
         </div>
       )}
-      {/* --- FIM ÁREA CONDICIONAL --- */}
 
       <button
         className="submit-button"
